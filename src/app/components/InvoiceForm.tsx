@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import html2pdf from "html2pdf.js";
+
 import Select from "react-select";
+import { usePdfDownloader } from "./usePdfDownloader";
 
 // Types
 type Product = {
@@ -27,6 +28,7 @@ const InvoiceForm = () => {
   const [invoiceId, setInvoiceId] = useState<string | null>(null);
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [saving, setSaving] = useState<"saving" | "saved" | null>(null);
+  const { downloadPdf } = usePdfDownloader();
 
   useEffect(() => {
     fetch("/api/products/get-all")
@@ -162,18 +164,18 @@ const InvoiceForm = () => {
     saveInvoice(updated);
   };
 
-  const downloadPDF = () => {
-    if (!previewRef.current) return;
-    html2pdf()
-      .from(previewRef.current)
-      .set({
-        margin: 0.5,
-        filename: `invoice-${customerName}.pdf`,
-        html2canvas: { scale: 2 },
-        jsPDF: { format: "a4", orientation: "portrait" },
-      })
-      .save();
-  };
+  // const downloadPDF = () => {
+  //   if (!previewRef.current) return;
+  //   html2pdf()
+  //     .from(previewRef.current)
+  //     .set({
+  //       margin: 0.5,
+  //       filename: `invoice-${customerName}.pdf`,
+  //       html2canvas: { scale: 2 },
+  //       jsPDF: { format: "a4", orientation: "portrait" },
+  //     })
+  //     .save();
+  // };
 
   const generateWhatsAppMessage = () => {
     let msg = `Customer Name: ${customerName}\nContact: ${contactNumber}\n\nProduct        Qty     Price    Total\n-------------------------------------\n`;
@@ -263,7 +265,9 @@ const InvoiceForm = () => {
           </button>
           <button
             className="bg-blue-600 hover:bg-blue-700 cursor-pointer transition-all duration-300 text-white px-4 py-2 rounded"
-            onClick={downloadPDF}
+            onClick={() =>
+              downloadPdf(previewRef, `invoice-${customerName}.pdf`)
+            }
           >
             Download PDF
           </button>
