@@ -6,6 +6,8 @@ import { connectDB } from "@/db/config";
 import Account from "@/models/Account";
 import { log } from "console";
 
+export const dynamic = "force-dynamic";
+
 export default async function AccountsPage() {
   // const data = await fetchAccounts();
   // console.log("Fetched accounts data:", data);
