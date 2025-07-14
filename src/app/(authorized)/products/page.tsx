@@ -4,6 +4,8 @@ import Product from "@/models/Product";
 import ProductList from "../../components/ProductList";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductsPage() {
   await connectDB();
   const user = await getCurrentUser();
