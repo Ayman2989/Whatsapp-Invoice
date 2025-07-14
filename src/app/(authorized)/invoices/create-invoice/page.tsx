@@ -1,6 +1,8 @@
 import React from "react";
 import InvoiceForm from "../../../components/InvoiceForm";
 
+export const dynamic = "force-dynamic";
+
 const Page = () => {
   return (
     <div className="p-6 bg-white min-h-screen text-primary">
