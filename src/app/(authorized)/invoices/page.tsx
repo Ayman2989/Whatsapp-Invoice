@@ -5,6 +5,8 @@ import { connectDB } from "@/db/config";
 import Invoice from "@/models/Invoice";
 import { Invoice as InvoiceType } from "../../../types/Invoice";
 
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
   await connectDB();
 
