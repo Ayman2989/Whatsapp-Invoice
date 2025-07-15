@@ -25,7 +25,8 @@ export async function middleware(req: NextRequest) {
   if (
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/products") ||
-    pathname.startsWith("/accounts")
+    pathname.startsWith("/accounts") ||
+    pathname.startsWith("/invoices")
   ) {
     if (!token) {
       return NextResponse.redirect(new URL("/login", req.url));
