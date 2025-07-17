@@ -1,7 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type LoginFormInputs = {
   email: string;
@@ -17,6 +17,10 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    alert("Demo Login:\nEmail: test@gmail.com\nPassword: Test123");
+  }, []);
 
   const onSubmit = async (data: LoginFormInputs) => {
     setLoading(true);
